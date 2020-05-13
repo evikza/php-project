@@ -1,3 +1,3 @@
 <?php	
 
-echo 'Heroku PHP version: ' . phpversion();
+echo 'Heroku PHP version: ' . phpversion() . ' (0.43)';
