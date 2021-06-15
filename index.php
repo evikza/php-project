@@ -1,3 +1,7 @@
 <?php	
 
-echo 'Heroku PHP version: ' . phpversion() . ' (0.43)';
+<?php
+
+$uri = $_GET['uri'];
+
+echo $uri;
