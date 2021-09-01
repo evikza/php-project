@@ -1,13 +1,19 @@
 <?php
 
-$context = stream_context_create([
-  'http' => [
-    'header' => ['Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'],
-//     'proxy' => 'tcp://51.158.169.52:29976', # tcp://51.158.169.52:29976
-    // 'request_fulluri' => true,
-  ],
-]);
+$uri = filter_var(@$_GET['uri'], FILTER_VALIDATE_URL)
+  ? @$_GET['uri']
+  : die(json_encode(['error' => 'Could not determine URI parameter']));
 
-$file = file_get_contents('https://www.google.com/finance/', false, $context);
+$response = file_get_contents(
+  $uri,
+  0,
+  stream_context_create([
+    'http' => [
+      'method' => 'GET',
+      'header' =>
+        'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36',
+    ],
+  ])
+);
 
-echo $file;
+echo $response;
