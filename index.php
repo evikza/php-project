@@ -1,5 +1,7 @@
 <?php
 
+header('Access-Control-Allow-Origin: *');
+
 $uri = filter_var(@$_GET['uri'], FILTER_VALIDATE_URL)
   ? @$_GET['uri']
   : die(json_encode(['error' => 'Could not determine URI parameter']));
